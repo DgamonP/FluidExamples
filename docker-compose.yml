@@ -1,0 +1,12 @@
+version: "2.1"
+services:
+  brainstorm-app:
+    container_name: brainstorm-node-app
+    build: .
+    ports:
+      - "8080:8080"
+  server:
+    container_name: server-tiny-app
+    build: .
+    ports:
+      - "8080:8080"
