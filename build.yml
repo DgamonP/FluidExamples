@@ -1,0 +1,67 @@
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+
+# FluidExamples build for CI and PR
+
+pool:
+  vmImage: ubuntu-latest
+
+parameters:
+- name: brainstorm
+  type: string
+  default: brainstorm
+- name: draft-js
+  type: string
+  default: draft-js
+- name: sudoku
+  type: string
+  default: sudoku
+
+trigger:
+- main
+
+pr:
+- main
+
+variables:
+  skipComponentGovernanceDetection: true
+
+steps:
+- task: ComponentGovernanceComponentDetection@0
+  inputs:
+    scanType: 'Register'
+    verbosity: 'Verbose'
+    alertWarningLevel: 'High'
+
+- task: UseNode@1
+  displayName: Use Node 12.x
+  inputs: 
+    version: 12.x
+
+- ${{ each parameter in parameters }}:
+  - task: Npm@1
+    displayName: Install - ${{ parameter.Value }}
+    inputs:
+      command: 'custom'
+      workingDir: '${{ parameter.Value }}'
+      customCommand: 'install'
+  - task: Npm@1
+    displayName: Build - ${{ parameter.Value }}
+    inputs:
+      command: 'custom'
+      workingDir: ${{ parameter.Value }}
+      customCommand: 'run build'
+  - task: Npm@1
+    displayName: Test - ${{ parameter.Value }}
+    inputs:
+      command: 'custom'
+      workingDir: ${{ parameter.Value }}
+      customCommand: 'run test:report'
+  - task: PublishTestResults@2
+    displayName: Publish Test Results - ${{ parameter.Value }}
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/*junit-report.xml'
+      searchFolder: ${{ parameter.Value }}/nyc
+      mergeTestResults: true
+    condition: succeededOrFailed()
