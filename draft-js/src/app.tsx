@@ -16,11 +16,11 @@ const App = () => {
   return (
     <div style={{ marginLeft: 5, marginRight: 5 }}>
       <nav className="nav-wrapper">
-        <span className="nav-title">Fluid-Draft.js Document Manager</span>
+        <span className="nav-title">Skyclick-Draft </span>
         <span className="vertical-center">
-          <Link to="/">Home</Link>
+          <Link to="/">Inicio</Link>
           <span> | </span>
-          <Link to="/about">About</Link>
+          <Link to="/about">Nosotros</Link>
         </span>
       </nav>
 
@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/about">
           <div className="content-wrapper">
             <h3>About</h3>
-            <p>Fluid Draft.js is about collecting awesome ideas</p>
+            <p>Fluid Draft trata de recopilar ideas increibles</p>
           </div>
         </Route>
         <Route path="/createNew/:id">
