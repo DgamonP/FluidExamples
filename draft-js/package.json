@@ -10,9 +10,9 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "npm run webpack --host 0.0.0.0 && npm run tsc",
-    "start": "concurrently \"npm:start:server\" \"npm:start:client\"",
+    "start": "concurrently \"npm:start:client\"",
     "start:client": "webpack-dev-server",
-    "start:server": "tinylicious",
+    /* "start:server": "tinylicious", */
     "start:test": "webpack-dev-server --config webpack.test.js",
     "test": "jest",
     "test:report": "jest --reporters=default --reporters=jest-junit",
