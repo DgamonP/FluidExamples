@@ -30,7 +30,7 @@ export class TinyliciousResourcesFactory implements utils.IResourcesFactory<Tiny
         const maxSendMessageSize = bytes.parse(config.get("alfred:maxMessageSize"));
         const collectionNames = config.get("mongo:collectionNames");
 
-        const tenantManager = new TenantManager(`http://0.0.0.0:${port}`);
+        const tenantManager = new TenantManager(`http://c8f8e67c7ec8.ngrok.io:${port}`);
         const dbFactory = new DbFactory();
         const taskMessageSender = new TaskMessageSender();
         const mongoManager = new MongoManager(dbFactory);
@@ -56,7 +56,7 @@ export class TinyliciousResourcesFactory implements utils.IResourcesFactory<Tiny
             config.get("foreman:permissions"),
             maxSendMessageSize,
             async (tenantId: string) => {
-                const url = `http://0.0.0.0:${port}/repos/${encodeURIComponent(tenantId)}`;
+                const url = `http://c8f8e67c7ec8.ngrok.io:${port}/repos/${encodeURIComponent(tenantId)}`;
                 return new Historian(url, false, false);
             },
             winston,

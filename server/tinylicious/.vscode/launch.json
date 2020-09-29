@@ -8,7 +8,7 @@
             "type": "node",
             "request": "attach",
             "name": "Attach",
-            "address": "localhost",
+            "address": "http://c8f8e67c7ec8.ngrok.io",
             "port": 9229,
             "restart": true,
             "sourceMaps": true,
